@@ -1,4 +1,5 @@
-{% assign main_menu_linklist = linklists[section.settings['main-menu']].links %}
+{% assign menu_handle = section.settings.main_menu | default: 'new-theme-menu' %}
+{% assign main_menu_linklist = linklists[menu_handle].links %}
 
 <header
   class="relative {% if section.settings.enable_sticky %}sticky top-0 z-50{% endif %}"
@@ -131,9 +132,8 @@
     },
     {
       "type": "link_list",
-      "id": "main-menu",
-      "label": "Main Menu",
-      "default": "main-menu"
+      "id": "main_menu",
+      "label": "Main Navigation"
     },
     {
       "type": "checkbox",

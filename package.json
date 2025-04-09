@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "shopify theme dev --store digitalframeworkstudios.myshopify.com",
-    "dev-sync": "shopify theme dev --theme-editor-sync --store digitalframeworkstudios.myshopify.com",
-    "pull": "shopify theme pull --store digitalframeworkstudios.myshopify.com",
-    "push": "shopify theme push --store digitalframeworkstudios.myshopify.com",
+    "dev": "shopify theme dev --store=qesvbc-k0.myshopify.com",
+    "dev-sync": "shopify theme dev --theme-editor-sync --store=qesvbc-k0.myshopify.com",
+    "pull": "shopify theme pull --store qesvbc-k0.myshopify.com",
+    "push": "shopify theme push --store qesvbc-k0.myshopify.com",
     "build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./assets/application.css",
     "watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./assets/application.css --watch"
   },
