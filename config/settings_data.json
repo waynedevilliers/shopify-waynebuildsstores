@@ -8,7 +8,22 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {},
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_alt": "Store logo",
+          "mobile_menu_title": "Menu",
+          "main_menu": "new-theme-menu",
+          "enable_sticky": false,
+          "header_background": "#ffffff",
+          "show_account_links": true
+        }
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {}
   }

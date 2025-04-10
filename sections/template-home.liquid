@@ -1,4 +1,5 @@
 {% comment %} Home Page Template {% endcomment %}
+{% assign blog_handle = section.settings.selected_blog %}
 
 <section class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 text-center">
@@ -7,7 +8,7 @@
       {{ section.settings.intro_subtext }}
     </p>
     <div class="mt-8 flex justify-center gap-4">
-      <a href="/blogs/news" class="px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-700">
+      <a href="{{ section.settings.cta_url }}" class="px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-700">
         {{ section.settings.cta_label }}
       </a>
     </div>
@@ -18,23 +19,25 @@
   <div class="max-w-5xl mx-auto px-4">
     <h2 class="text-3xl font-semibold text-center text-gray-900 mb-12">{{ section.settings.blog_section_heading }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Blog post cards -->
-      {% for article in blogs.news.articles %}
-        <a href="{{ article.url }}" class="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
-          {% if article.image %}
-            <img
-              class="w-full h-auto object-contain"
-              src="{{ article.image | img_url: '720x480' }}"
-              alt="{{ article.title }}"
-              class="w-full h-48 object-cover"
-            >
-          {% endif %}
-          <div class="p-5">
-            <h3 class="text-xl font-semibold text-gray-800">{{ article.title }}</h3>
-            <p class="mt-2 text-gray-600 text-sm">{{ article.excerpt | strip_html | truncatewords: 20 }}</p>
-          </div>
-        </a>
-      {% endfor %}
+      {% if blogs[blog_handle].articles.size > 0 %}
+        {% for article in blogs[blog_handle].articles limit: section.settings.blog_post_limit %}
+          <a href="{{ article.url }}" class="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+            {% if article.image %}
+              <img
+                class="w-full h-auto object-contain"
+                src="{{ article.image | img_url: '720x480' }}"
+                alt="{{ article.title }}"
+              >
+            {% endif %}
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-gray-800">{{ article.title }}</h3>
+              <p class="mt-2 text-gray-600 text-sm">{{ article.excerpt | strip_html | truncatewords: 20 }}</p>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <p class="text-center text-gray-500">No blog posts available yet.</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -45,7 +48,10 @@
     <p class="mt-4 text-gray-600">
       {{ section.settings.contact_subtext }}
     </p>
-    <a href="/pages/contact" class="mt-6 inline-block px-6 py-3 bg-black text-white rounded-md hover:bg-blue-500">
+    <a
+      href="{{ section.settings.contact_button_url }}"
+      class="mt-6 inline-block px-6 py-3 bg-black text-white rounded-md hover:bg-blue-500"
+    >
       {{ section.settings.contact_button_label }}
     </a>
   </div>
@@ -83,6 +89,11 @@
       "id": "blog_section_heading",
       "label": "Blog Section Heading",
       "default": "Featured Case Studies"
+    },
+    {
+      "type": "blog",
+      "id": "selected_blog",
+      "label": "Select Blog"
     },
     {
       "type": "range",

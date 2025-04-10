@@ -11,7 +11,19 @@
   "sections": {
     "main": {
       "type": "template-home",
-      "settings": {}
+      "settings": {
+        "intro_heading": "Hi, I'm Wayne de Villiers",
+        "intro_subtext": "I'm a junior full-stack developer focused on building beautiful, fast Shopify stores. Explore my work below or get in touch!",
+        "cta_label": "View Blog",
+        "cta_url": "",
+        "blog_section_heading": "Featured Case Studies",
+        "selected_blog": "waynes-workshop",
+        "blog_post_limit": 4,
+        "contact_heading": "Want to collaborate?",
+        "contact_subtext": "Check out my contact page or drop me a message to talk about freelance or junior developer opportunities.",
+        "contact_button_url": "",
+        "contact_button_label": "Contact Me"
+      }
     }
   },
   "order": [

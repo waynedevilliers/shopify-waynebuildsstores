@@ -1,4 +1,4 @@
-{% assign menu_handle = section.settings.main_menu | default: 'new-theme-menu' %}
+{% assign menu_handle = section.settings.main_menu | default: 'main-menu' %}
 {% assign main_menu_linklist = linklists[menu_handle].links %}
 
 <header
@@ -26,25 +26,23 @@
           @click="mobileMenuOpen = true"
           type="button"
           class="bg-white p-2 inline-flex items-center justify-center focus:outline-none"
-          aria-label="Open mobile menu"
+          aria-label="{{ section.settings.mobile_menu_title }}"
         >
           {% render 'icon-hamburger' %}
         </button>
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex gap-4" aria-label="Primary navigation">
+      <nav class="hidden md:flex gap-4" aria-label="Main navigation">
         {% for link in main_menu_linklist %}
           {% if link.links != blank %}
-            <div class="relative flex items-center gap-2" x-data="{ open: false }">
-              <!-- Blog link (navigates directly) -->
+            <div class="relative flex justify-center items-center gap-2" x-data="{ open: false }">
               <a
                 href="{{ link.url }}"
-                class="text-base text-gray-500 hover:text-gray-900"
+                class="text-base text-gray-800 hover:text-gray-900"
               >
                 {{ link.title }}
               </a>
-              <!-- Dropdown toggle icon and menu -->
               <div class="relative">
                 <button
                   @click="open = !open"
@@ -79,7 +77,6 @@
                 </div>
               </div>
             </div>
-
           {% else %}
             <div class="relative">
               <a href="{{ link.url }}" class="text-base text-gray-500 hover:text-gray-900">
