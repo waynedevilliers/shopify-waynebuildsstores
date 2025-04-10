@@ -1,4 +1,4 @@
-{% assign menu_handle = section.settings.main_menu | default: 'main-menu' %}
+{% assign menu_handle = section.settings.main_menu | default: 'new-theme-menu' %}
 {% assign main_menu_linklist = linklists[menu_handle].links %}
 
 <header
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex gap-4" aria-label="Main navigation">
+      <nav class="hidden md:flex gap-4" aria-label="Primary navigation">
         {% for link in main_menu_linklist %}
           {% if link.links != blank %}
             <div class="relative flex justify-center items-center gap-2" x-data="{ open: false }">
