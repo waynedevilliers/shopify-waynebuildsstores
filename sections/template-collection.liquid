@@ -1,20 +1,29 @@
-<div class="px-4 py-8">
+<section id="collection-template" class="px-4 py-12">
   {% paginate collection.products by section.settings.number_of_products_per_page %}
-    <h1 class="text-3xl text-center">{{ collection.title }}</h1>
+    <!-- Collection Heading -->
+    <header id="collection-header" class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-semibold text-gray-900">{{ collection.title }}</h1>
+    </header>
 
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Product Grid -->
+    <section id="product-grid-wrapper" class="max-w-6xl mx-auto">
+      <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {% for product in collection.products %}
-          {% render 'product-card', product_product: product %}
+          <article class="h-full flex flex-col">
+            {% render 'product-card', product_product: product %}
+          </article>
         {% else %}
-          <p>There are no products inside of this collection</p>
+          <p class="text-center text-gray-600 col-span-full">There are no products inside of this collection.</p>
         {% endfor %}
       </div>
-    </div>
+    </section>
 
-    {% render 'pagination', pagination: paginate %}
+    <!-- Pagination -->
+    <div id="collection-pagination" class="mt-12">
+      {% render 'pagination', pagination: paginate %}
+    </div>
   {% endpaginate %}
-</div>
+</section>
 
 {% schema %}
 {

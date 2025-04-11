@@ -1,33 +1,37 @@
-<main class="flex flex-col items-center my-8">
-  <h1 class="text-3xl font-medium">{{ section.settings.title }}</h1>
+<main id="collections-page" class="flex flex-col items-center my-8">
+  <header id="collections-header" class="w-full text-center mb-6">
+    <h1 class="text-3xl font-medium text-gray-900">{{ section.settings.title }}</h1>
+  </header>
 
-  <section class="max-w-6xl mx-auto my-3">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+  <section id="collections-grid-wrapper" class="max-w-6xl w-full mx-auto px-4">
+    <div id="collections-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {% for collection in collections %}
         {% if collection.all_products_count > 0 %}
-          <div class="w-full py-6 px-3">
-            <div class="border bg-white overflow-hidden">
-              <a href="{{ collection.url }}">
-                <div class="h-80 overflow-hidden">
-                  {% if collection.featured_image != blank %}
-                    {% assign collection_image = collection.featured_image %}
-                  {% else %}
-                    {% assign collection_image = collection.products.first.image %}
-                  {% endif %}
+          <article id="collection-card-{{ collection.handle }}" class="w-full h-full">
+            <div class="h-full flex flex-col border bg-white shadow rounded overflow-hidden">
+              <a href="{{ collection.url }}" class="block h-80 overflow-hidden">
+                {% if collection.featured_image != blank %}
+                  {% assign collection_image = collection.featured_image %}
+                {% else %}
+                  {% assign collection_image = collection.products.first.image %}
+                {% endif %}
 
+                {% if collection_image %}
                   <img
-                    class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105"
+                    class="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-105"
                     src="{{ collection_image | img_url: 'medium' }}"
                     alt="{{ collection.title | escape }}"
                   >
-                </div>
+                {% else %}
+                  {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+                {% endif %}
               </a>
 
-              <div class="p-4 bg-gray-100">
-                <h1 class="text-xl">{{ collection.title }}</h1>
+              <div class="p-4 bg-gray-100 flex-grow flex items-center justify-center">
+                <h2 class="text-xl text-center text-gray-800">{{ collection.title }}</h2>
               </div>
             </div>
-          </div>
+          </article>
         {% endif %}
       {% endfor %}
     </div>

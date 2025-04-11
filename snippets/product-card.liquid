@@ -1,26 +1,34 @@
-<section class="w-full py-6 px-3">
-  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
-    <a href="{{ product_product.url }}">
+<article id="product-card" class="w-full h-full p-3">
+  <div id="product-card-wrapper" class="h-full flex flex-col border bg-white shadow-lg rounded-lg overflow-hidden">
+    <!-- Product Image -->
+    <a href="{{ product_product.url }}" id="product-card-link" class="block h-80 overflow-hidden">
       {% if product_product.featured_image %}
-        <figure class="h-80 overflow-hidden">
+        <figure id="product-image" class="h-full">
           <img
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-105"
             src="{{ product_product.featured_image | img_url: 'medium' }}"
-            alt="{{ product_product.featured_image.alt }}"
+            alt="{{ product_product.featured_image.alt | escape }}"
           >
         </figure>
-
       {% else %}
-        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+        <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+        </div>
       {% endif %}
     </a>
 
-    <section class="flex flex-col p-4">
-      <span class="text-sm text-gray-400">{{ product_product.vendor }}</span>
+    <!-- Product Info -->
+    <section id="product-details" class="flex flex-col flex-grow p-4 justify-between">
+      <header class="mb-2">
+        <span class="text-sm text-gray-400">{{ product_product.vendor }}</span>
+        <h2 class="text-lg font-medium text-gray-800 mt-1">
+          <a href="{{ product_product.url }}" class="hover:underline">{{ product_product.title }}</a>
+        </h2>
+      </header>
 
-      <a href="{{ product_product.url }}" class="text-gray-700 uppercase font-medium">{{ product_product.title }}</a>
-
-      <p class="text-gray-500">{{ product_product.price | money }}</p>
+      <footer>
+        <p class="text-gray-700 font-semibold">{{ product_product.price | money }}</p>
+      </footer>
     </section>
   </div>
-</section>
+</article>
